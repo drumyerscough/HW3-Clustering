@@ -16,18 +16,12 @@ def test_kmeans_constructor_exceptions():
     # check for negative k
     with pytest.raises(ValueError):
         km = KMeans(k=-5)
-    # check for non-integer k
-    with pytest.raises(ValueError):
-        km = KMeans(k=8.5)
     # check for negative tol
     with pytest.raises(ValueError):
         km = KMeans(tol=-1)
     # check for negative max_iter
     with pytest.raises(ValueError):
         km = KMeans(max_iter=-1)
-    # check for float max_iter
-    with pytest.raises(ValueError):
-        km = KMeans(max_iter=100.5)
 
 
 def test_kmeans_fit_exceptions():

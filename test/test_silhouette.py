@@ -13,8 +13,10 @@ def test_silhouette():
     # and 4 labels
     X = np.random.rand(50, 3)
     y = np.random.randint(5, size=50)
+    score = np.mean(Silhouette().score(X, y))
 
-    assert np.mean(Silhouette().score(X, y)) == silhouette_score(X, y)
+    # round because of differences due to numerical precision
+    assert round(score, 3) == round(silhouette_score(X, y), 3)
 
 def test_silhouette_exceptions():
     """
