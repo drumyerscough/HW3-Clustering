@@ -17,7 +17,7 @@ jobs:
       - name: Install package
         run: |
           pip install --upgrade pip
-          pip install pytest numpy scipy sklearn
+          pip install pytest numpy scipy scikit-learn
 
       - name: Test with pytest
         run: |
