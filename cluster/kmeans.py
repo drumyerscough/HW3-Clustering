@@ -22,7 +22,11 @@ class KMeans:
         """
         if k <= 1:
             raise ValueError("This k doesn't make sense. k should be an integer greater than 1.")
-        
+        if tol < 0:
+            raise ValueError("This tolerance doesn't make sense. tol should be a float greater than or equal to 0.")
+        if max_iter <= 0:
+            raise ValueError("This max_iter doesn't make sense. max_iter should be an integer greater than 0.")
+                
         self._k = k
         self._tol = tol
         self._max_iter = max_iter
@@ -47,9 +51,12 @@ class KMeans:
         """
         if self._k >= len(mat):
             raise Exception('This dataset is smaller than the number of clusters k.')
+        
+        if mat.size == 0:
+            raise Exception('The input matrix is empty.')
         elif mat.dtype != float and mat.dtype != int:
             raise Exception('The input matrix contains non-numerical data. KMeans only works on numerical data.')
-        
+                
         num_iter = 0
         sse = np.inf
         delta_sse = np.inf
@@ -90,11 +97,13 @@ class KMeans:
             np.ndarray
                 a 1D array with the cluster label for each of the observations in `mat`
         """
-        if mat.dtype != float and mat.dtype != int:
-            raise Exception('The input matrix contains non-numerical data. KMeans only works on numerical data.')
-        elif self._mu.all() == None:
+        if self._mu.all() == None:
             raise Exception("This instance of KMeans hasn't been fit yet.")
-
+        if mat.size == 0:
+            raise Exception('The input matrix is empty.')
+        elif mat.dtype != float and mat.dtype != int:
+            raise Exception('The input matrix contains non-numerical data. KMeans only works on numerical data.')
+        
         return np.argmin(cdist(mat, self._mu), axis=1)
 
     def get_error(self) -> float:

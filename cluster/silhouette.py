@@ -28,6 +28,8 @@ class Silhouette:
             raise ValueError('X contains non-numerical data. Silhouette scoring with Euclidean distance only works on numerical data.')
         if X.shape[0] != y.shape[0]:
             raise Exception('X and y are different lengths.')
+        if X.shape[0] == 0 or y.shape[0] == 0:
+            raise Exception('X and/or y seem to be empty.')
         
         # convert unique labels in y to numbers, then to 1-hot matrix
         lbl_map = {lbl: idx for idx, lbl in enumerate(np.unique(y))}
