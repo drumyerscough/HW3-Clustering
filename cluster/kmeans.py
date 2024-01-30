@@ -60,20 +60,24 @@ class KMeans:
         num_iter = 0
         sse = np.inf
         delta_sse = np.inf
-        #mu = np.random.rand(self._k, mat.shape[1])
+
+        # initialize centroids to be on random data points
         mu = mat[np.random.randint(mat.shape[0], size=self._k), :]
 
         while num_iter < self._max_iter and delta_sse > self._tol:
             r = cdist(mat, mu)
-            #r = np.argmin(r, axis=1, keepdims=True)
+
+            # get argmin of each row of r and make 1-hot
             r = np.equal(r, np.min(r, axis=1, keepdims=True))
+
+            # update centroids based on 1-hot r
             mu = np.matmul(r.T,mat) / np.sum(r, axis=0, keepdims=True).T
 
             new_sse = np.sum(cdist(mat, mu)**2 * r)
             if num_iter == 0:
                 delta_sse = new_sse
             else:
-                delta_sse = new_sse - sse
+                delta_sse = abs(sse - new_sse)
             sse = new_sse
             num_iter += 1
 
