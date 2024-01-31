@@ -15,7 +15,7 @@ def test_kmeans():
 
     # if km is initialized but doesn't run and doesn't raise exceptions, this will fail
     assert km.get_error() != None
-    assert km.get_centroids().all() != None
+    assert km.get_centroids() is not None
 
 
 def test_kmeans_constructor_exceptions():
