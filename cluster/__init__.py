@@ -12,3 +12,5 @@ from .utils import (
 """
 My implementations of KMeans clustering and silhouette scoring.
 """
+
+__version__ = "0.1.1"
