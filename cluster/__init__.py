@@ -5,3 +5,6 @@ from .utils import (
         plot_clusters,
         plot_multipanel)
 
+"""
+My implementations of KMeans clustering and silhouette scoring.
+"""
