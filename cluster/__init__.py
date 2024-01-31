@@ -1,3 +1,7 @@
+"""
+KMeans clustering and silhouette scoring
+"""
+
 from .kmeans import KMeans
 from .silhouette import Silhouette
 from .utils import (
