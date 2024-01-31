@@ -140,7 +140,7 @@ class KMeans:
             np.ndarray
                 a `k x m` 2D matrix representing the cluster centroids of the fit model
         """
-        if self._mu is not None:
+        if self._mu is None:
             raise Exception("This instance of KMeans hasn't been fit yet.")
 
         return self._mu
