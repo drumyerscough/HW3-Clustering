@@ -1,12 +1,21 @@
 import pytest
 import numpy as np
-from cluster import KMeans
+from cluster import KMeans, make_clusters
 
 def test_kmeans():
     """
-    Tests to make sure that the KMeans clustering works on a trivial example.
+    Tests to make sure that the KMeans clustering runs on an example. 
+    This doesn't necessarily mean it works, but since KMeans is stochastic and often bad,
+    it's hard to guarantee that a non-trivial example would work.
     """
-    pass
+    clusters, labels = make_clusters(k=4, scale=1)
+    km = KMeans(k=4)
+    km.fit(clusters)
+    pred = km.predict(clusters)
+
+    # if km is initialized but doesn't run and doesn't raise exceptions, this will fail
+    assert km.get_error() != None
+    assert km.get_centroids() != None
 
 
 def test_kmeans_constructor_exceptions():

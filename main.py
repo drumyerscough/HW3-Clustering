@@ -19,7 +19,6 @@ def main():
     
     clusters, labels = make_clusters(k=4, scale=1)
     km = KMeans(k=4)
-    #km = KMeans(n_clusters=4,init='random', n_init=1, max_iter=300, tol=0.0001, verbose=1, random_state=r)
     km.fit(clusters)
     pred = km.predict(clusters)
     scores = Silhouette().score(clusters, pred)

@@ -11,7 +11,7 @@ pythonpath = [
 ]
 
 [project]
-name = "KMeans"
+name = "cluster"
 authors = [{name = "Dru Myerscough", email = "Dru.Myerscough@ucsf.edu"}]
 readme = "README.md"
 license = {file = "LICENSE"}

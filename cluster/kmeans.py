@@ -62,7 +62,15 @@ class KMeans:
         delta_sse = np.inf
 
         # initialize centroids to be on random data points
-        mu = mat[np.random.randint(mat.shape[0], size=self._k), :]
+        #mu = mat[np.random.choice(mat.shape[0], size=self._k, replace=False), :]
+        
+        # initialize centroids using kmeans++
+        dists = cdist(mat, mat)
+        mu_idxs = [np.random.randint(mat.shape[0])]
+        for _ in range(self._k - 1):
+            probs = dists[mu_idxs[-1], :]**2 / np.sum(dists[mu_idxs[-1], :]**2)
+            mu_idxs.append(np.random.choice(mat.shape[0], p=probs))
+        mu = mat[mu_idxs, :]
 
         while num_iter < self._max_iter and delta_sse > self._tol:
             r = cdist(mat, mu)
